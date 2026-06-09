@@ -1,3 +1,6 @@
+
+raw
+Portfolio · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +29,7 @@
     font-size: 15px;
     line-height: 1.7;
   }
-
+ 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -41,7 +44,7 @@
     font-size: 0.95rem; font-weight: 700; color: var(--ink);
     letter-spacing: 0.01em;
   }
-  .nav-id span { color: var(--red); font-style: italic; font-weight: 400; }
+  .nav-id span { color: var(--ink); font-style: normal; font-weight: 400; }
   nav ul { list-style: none; display: flex; gap: 32px; }
   nav ul a {
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
@@ -49,7 +52,7 @@
     transition: color 0.18s;
   }
   nav ul a:hover { color: var(--red); }
-
+ 
   /* HERO */
   .hero {
     padding: 130px 64px 90px;
@@ -82,7 +85,6 @@
     font-size: 0.62rem; color: var(--ink-3);
     letter-spacing: 0.06em;
   }
-  /* hero right: vertical info strip */
   .hero-strip {
     display: flex; flex-direction: column; gap: 0;
     border: 1px solid var(--rule); background: var(--white);
@@ -99,11 +101,9 @@
     color: var(--ink-3);
   }
   .strip-val { font-size: 0.82rem; font-weight: 600; color: var(--ink); }
-
-  /* DIVIDER */
+ 
   .divider { height: 1px; background: var(--rule); }
-
-  /* SECTION */
+ 
   .section { padding: 88px 0; }
   .section.bg-white { background: var(--white); }
   .inner { max-width: 1120px; margin: 0 auto; padding: 0 64px; }
@@ -122,10 +122,9 @@
   }
   .sec-title em { color: var(--red); font-style: italic; font-weight: 400; }
   .sec-sub { color: var(--ink-3); max-width: 560px; margin-top: 12px; font-weight: 300; font-size: 0.93rem; }
-
-  /* PROJECT CARDS */
+ 
   .projects { display: flex; flex-direction: column; gap: 3px; }
-
+ 
   .proj {
     background: var(--white);
     border: 1px solid var(--rule);
@@ -133,7 +132,7 @@
     transition: box-shadow 0.22s;
   }
   .proj:hover { box-shadow: 0 6px 40px rgba(24,22,18,0.10); }
-
+ 
   .proj-top {
     display: grid;
     grid-template-columns: 88px 1fr 200px;
@@ -147,7 +146,7 @@
     padding: 32px 0;
   }
   .proj-num.accent { background: var(--red); }
-
+ 
   .proj-info { padding: 28px 36px; }
   .proj-date {
     font-family: 'JetBrains Mono', monospace;
@@ -168,7 +167,7 @@
   }
   .t-red { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-mid); }
   .t-grey { background: #f0ede8; color: var(--ink-3); border: 1px solid var(--rule); }
-
+ 
   .proj-metrics {
     border-left: 1px solid var(--rule);
     padding: 28px 24px;
@@ -181,8 +180,9 @@
     font-size: 1.7rem; font-weight: 700; line-height: 1;
     color: var(--red);
   }
+  .m-ctx { font-size: 0.65rem; font-weight: 600; color: var(--ink-2); margin-bottom: 2px; }
   .m-lbl { font-size: 0.63rem; color: var(--ink-3); font-weight: 500; }
-
+ 
   .proj-body {
     border-top: 1px solid var(--rule);
     display: grid; grid-template-columns: 1fr 1fr;
@@ -196,7 +196,7 @@
   }
   .pb-text { font-size: 0.83rem; color: var(--ink-2); line-height: 1.78; }
   .pb-text strong { color: var(--ink); font-weight: 600; }
-
+ 
   .proj-reflection {
     border-top: 1px solid var(--rule);
     padding: 20px 36px;
@@ -209,8 +209,7 @@
     color: var(--red); white-space: nowrap; flex-shrink: 0; padding-top: 2px;
   }
   .refl-text { font-size: 0.82rem; color: var(--ink-2); line-height: 1.75; font-style: italic; }
-
-  /* DOWNLOADS SECTION */
+ 
   .proj-downloads {
     border-top: 1px solid var(--rule);
     padding: 20px 36px;
@@ -226,8 +225,7 @@
   .dl-links a { color: var(--red); text-decoration: none; font-weight: 600; transition: opacity 0.18s; }
   .dl-links a:hover { opacity: 0.7; }
   .dl-links a + a::before { content: ' · '; color: var(--ink-3); margin: 0 8px; }
-
-  /* SKILLS */
+ 
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -252,8 +250,7 @@
     transition: width 1.2s cubic-bezier(.4,0,.2,1);
   }
   .sk-note { font-size: 0.73rem; color: var(--ink-3); }
-
-  /* FOOTER */
+ 
   footer {
     padding: 52px 64px;
     display: flex; justify-content: space-between;
@@ -266,11 +263,10 @@
   }
   .ft-name em { color: var(--red); font-style: italic; font-weight: 400; }
   .ft-info { text-align: right; font-size: 0.75rem; color: var(--ink-3); line-height: 1.9; }
-
-  /* REVEAL */
+ 
   .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
   .reveal.in { opacity: 1; transform: none; }
-
+ 
   @media (max-width: 860px) {
     nav, .hero, .inner, footer { padding-left: 24px; padding-right: 24px; }
     nav ul { display: none; }
@@ -286,7 +282,7 @@
 </style>
 </head>
 <body>
-
+ 
 <nav>
   <div class="nav-id">Malik <span>Páramo</span></div>
   <ul>
@@ -294,7 +290,7 @@
     <li><a href="#skills">Skills</a></li>
   </ul>
 </nav>
-
+ 
 <div style="padding-top:60px">
 <div class="hero">
   <div>
@@ -340,9 +336,9 @@
   </div>
 </div>
 </div>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- PROJECTS -->
 <div class="section bg-white" id="projects">
 <div class="inner">
@@ -351,9 +347,9 @@
     <h2 class="sec-title">What I <em>Built</em></h2>
     <p class="sec-sub">Six AI projects from February to May 2026, each applying a different family of techniques to real computational problems.</p>
   </div>
-
+ 
   <div class="projects">
-
+ 
   <!-- PA1 -->
   <div class="proj reveal" id="pa1">
     <div class="proj-top">
@@ -371,34 +367,30 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">Matrix Multiplication</span><span class="m-val">7,288× faster</span><span class="m-lbl">NumPy vs. Python at 500×500 — same math, entirely different speed</span></div>
-        <div class="metric"><span class="m-ctx">Vector Multiplication</span><span class="m-val">33× faster</span><span class="m-lbl">NumPy vs. Python at 500 elements — gap grows with input size</span></div>
-        <div class="metric"><span class="m-ctx">Measurement Rigor</span><span class="m-val">15 timed runs</span><span class="m-lbl">Per data point, with 1 warm-up run and a fixed random seed for fairness</span></div>
+        <div class="metric"><div class="m-ctx">Matrix Multiplication</div><span class="m-val">7,288×</span><span class="m-lbl">NumPy vs. Python at 500×500 — same math, entirely different speed</span></div>
+        <div class="metric"><div class="m-ctx">Vector Multiplication</div><span class="m-val">33×</span><span class="m-lbl">NumPy vs. Python at 500 elements — gap grows with input size</span></div>
+        <div class="metric"><div class="m-ctx">Measurement Rigor</div><span class="m-val">15 runs</span><span class="m-lbl">Per data point, with 1 warm-up run and a fixed random seed for fairness</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">What I Built</div>
-        <div class="pb-text">Implemented <strong>py_elementwise</strong> and <strong>np_elementwise</strong> — the two core 1-D vector multiplication functions. The Python version loops explicitly over paired elements at O(n); the NumPy version uses the native <code>a*b</code> vectorized operator. Both fed into a shared <code>median_time</code> benchmarking harness that handled warm-up, trial repetition, and timing isolation so all comparisons were fair across implementations.<br><br>The experiment design used five input sizes [10, 50, 100, 200, 500], applied to both 1-D and 2-D operations, yielding 20 data points in total. Each was run independently per function and recorded to a results table before any analysis began.</div>
+        <div class="pb-text">Implemented py_elementwise and np_elementwise — the two core 1-D vector multiplication functions. The Python version loops explicitly over paired elements at O(n); the NumPy version uses the native <code>a*b</code> vectorized operator. Both fed into a shared <code>median_time</code> benchmarking harness that handled warm-up, trial repetition, and timing isolation so all comparisons were fair across implementations.<br><br>The experiment design used five input sizes [10, 50, 100, 200, 500], applied to both 1-D and 2-D operations, yielding 20 data points in total. Each was run independently per function and recorded to a results table before any analysis began.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Results & Analysis</div>
-        <div class="pb-text">The 1-D speedup grew from <strong>1.1× at n=10</strong> to <strong>33× at n=500</strong> — slowly at first because fixed overhead (timer resolution, function calls) dominates small inputs. The matrix multiplication gap was far more dramatic: <strong>7,288× at 500×500</strong>, driven by the O(n³) compounding of loop overhead vs. BLAS-backed NumPy.<br><br>The root cause is twofold: NumPy executes in compiled C/Fortran with no Python interpreter overhead per iteration, and stores data contiguously in memory, enabling CPU cache reuse. Python lists use pointer indirection, causing cache misses on every element access in a nested loop. The practical lesson: O(n) and O(n³) implementations that look equivalent in theory diverge catastrophically in wall-clock time at scale.</div>
+        <div class="pb-text">The 1-D speedup grew from 1.1× at n=10 to 33× at n=500 — slowly at first because fixed overhead (timer resolution, function calls) dominates small inputs. The matrix multiplication gap was far more dramatic: 7,288× at 500×500, driven by the O(n³) compounding of loop overhead vs. BLAS-backed NumPy.<br><br>The root cause is twofold: NumPy executes in compiled C/Fortran with no Python interpreter overhead per iteration, and stores data contiguously in memory, enabling CPU cache reuse. Python lists use pointer indirection, causing cache misses on every element access in a nested loop. The practical lesson: O(n) and O(n³) implementations that look equivalent in theory diverge catastrophically in wall-clock time at scale.</div>
       </div>
-    </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">A 7,000× gap for the same mathematical operation changed how I evaluate code before writing it. Big-O complexity describes growth rate, not absolute speed. Library choice, memory layout, and interpreter overhead are first-class engineering decisions.</span>
     </div>
     <div class="proj-downloads">
       <span class="dl-label">Resources</span>
       <div class="dl-links">
-        <a href="PA1/Group M programming python fast or slow.ipynb" download>Notebook</a>
-        <a href="PA1/Group M programming python fast or slow (1).pdf" download>PDF Report</a>
+        <a href="PA1/Group_M_programming_python_fast_or_slow.ipynb" download>Notebook</a>
+        <a href="PA1/Group_M_programming_python_fast_or_slow_1_.pdf" download>PDF Report</a>
       </div>
     </div>
   </div>
-
+ 
   <!-- PA2 -->
   <div class="proj reveal" id="pa2">
     <div class="proj-top">
@@ -416,34 +408,30 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">Best Agent in Corridor</span><span class="m-val">Score: 3,279</span><span class="m-lbl">Model-based agent dominated the tight 1×18 hallway by learning blocked directions</span></div>
-        <div class="metric"><span class="m-ctx">Best Agent in Open Grid</span><span class="m-val">Score: 2,462</span><span class="m-lbl">Simple Reflex agent won on open 2D grids — fewer wasted moves than DFS</span></div>
-        <div class="metric"><span class="m-ctx">Experiment Size</span><span class="m-val">50 trials</span><span class="m-lbl">Randomized start positions and dirt each run to eliminate bias</span></div>
+        <div class="metric"><div class="m-ctx">Best Agent in Corridor</div><span class="m-val">3,279</span><span class="m-lbl">Model-based agent dominated the tight 1×18 hallway by learning blocked directions</span></div>
+        <div class="metric"><div class="m-ctx">Best Agent in Open Grid</div><span class="m-val">2,462</span><span class="m-lbl">Simple Reflex agent won on open 2D grids — fewer wasted moves than DFS</span></div>
+        <div class="metric"><div class="m-ctx">Experiment Size</div><span class="m-val">50 trials</span><span class="m-lbl">Randomized start positions and dirt each run to eliminate bias</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">What I Built</div>
-        <div class="pb-text">Designed the <strong>experimental framework</strong> for the two-location world: fixed a 20-step horizon, randomized starting position and dirt configuration at each trial, and defined cumulative score (cleaning bonus minus action cost) as the metric. Co-implemented Exercise 2.11 — the environment loop, percept generator, and transition function that all agents shared.<br><br>The three agents operated on identical state information. The <strong>Simple Reflex</strong> agent follows one rule: SUCK if dirty, else move. The <strong>Random</strong> agent samples uniformly from all actions. The <strong>Model-Based</strong> agent builds an internal map, performs DFS, and avoids retrying blocked directions.</div>
+        <div class="pb-text">Designed the experimental framework for the two-location world: fixed a 20-step horizon, randomized starting position and dirt configuration at each trial, and defined cumulative score (cleaning bonus minus action cost) as the metric. Co-implemented Exercise 2.11 — the environment loop, percept generator, and transition function that all agents shared.<br><br>The three agents operated on identical state information. The Simple Reflex agent follows one rule: SUCK if dirty, else move. The Random agent samples uniformly from all actions. The Model-Based agent builds an internal map, performs DFS, and avoids retrying blocked directions.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Results & Analysis</div>
-        <div class="pb-text">In a single run both agents started at A with both squares dirty. The reflex agent scored <strong>28</strong>; the random agent scored <strong>12</strong> — a 57% gap — because the random agent wasted moves on walls, repeated visits, and NOOPs before finally cleaning B at step 19.<br><br>Across 50 trials the gap narrowed to 34.18 vs 32.84 because when squares start clean, the reflex agent's early-cleaning advantage disappears. In the <strong>2D grid</strong>, reflex (2462) beat model-based (2322) on average — systematic DFS cost too many steps in small open spaces. But in the <strong>1×18 corridor</strong>, model-based dominated (3279 vs 1939) by learning UP/DOWN were blocked and never wasting moves on them again. The right agent depends entirely on the environment's geometry.</div>
+        <div class="pb-text">In a single run both agents started at A with both squares dirty. The reflex agent scored 28; the random agent scored 12 — a 57% gap — because the random agent wasted moves on walls, repeated visits, and NOOPs before finally cleaning B at step 19.<br><br>Across 50 trials the gap narrowed to 34.18 vs 32.84 because when squares start clean, the reflex agent's early-cleaning advantage disappears. In the 2D grid, reflex (2462) beat model-based (2322) on average — systematic DFS cost too many steps in small open spaces. But in the 1×18 corridor, model-based dominated (3279 vs 1939) by learning UP/DOWN were blocked and never wasting moves on them again. The right agent depends entirely on the environment's geometry.</div>
       </div>
-    </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">Smarter doesn't always mean better. A model-based agent that systematically avoids wasted moves is a liability in open spaces but a decisive advantage when the environment has structure that can be learned and exploited.</span>
     </div>
     <div class="proj-downloads">
       <span class="dl-label">Resources</span>
       <div class="dl-links">
-        <a href="PA2/Grupo M Agents .ipynb" download>Notebook</a>
-        <a href="PA2/Group M programming - Agents (1).pdf" download>PDF Report</a>
+        <a href="PA2/Grupo_M_Agents_.ipynb" download>Notebook</a>
+        <a href="PA2/Group_M_programming_-_Agents_1_.pdf" download>PDF Report</a>
       </div>
     </div>
   </div>
-
+ 
   <!-- PA3 -->
   <div class="proj reveal" id="pa3">
     <div class="proj-top">
@@ -462,27 +450,30 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">Shortest Path Found</span><span class="m-val">Cost: 13.342</span><span class="m-lbl">A* and UCS both confirmed this as optimal; Greedy found 13.488 (suboptimal)</span></div>
-        <div class="metric"><span class="m-ctx">A* Efficiency</span><span class="m-val">14 vs 31 nodes</span><span class="m-lbl">A* expanded 14 nodes to find the answer; UCS needed 31 — same result, 2× the work</span></div>
-        <div class="metric"><span class="m-ctx">River Crossing Puzzle</span><span class="m-val">11 crossings</span><span class="m-lbl">BFS found the minimum moves to safely cross all missionaries and cannibals</span></div>
+        <div class="metric"><div class="m-ctx">Shortest Path Found</div><span class="m-val">13.342</span><span class="m-lbl">A* and UCS both confirmed this as optimal; Greedy found 13.488 (suboptimal)</span></div>
+        <div class="metric"><div class="m-ctx">A* Efficiency</div><span class="m-val">14 vs 31</span><span class="m-lbl">A* expanded 14 nodes to find the answer; UCS needed 31 — same result, 2× the work</span></div>
+        <div class="metric"><div class="m-ctx">River Crossing Puzzle</div><span class="m-val">11 crossings</span><span class="m-lbl">BFS found the minimum moves to safely cross all missionaries and cannibals</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">What I Built</div>
-        <div class="pb-text">Wrote the complete <strong>Methodology section</strong> and led the <strong>analysis for Problem 3.7</strong>. The key implementation insight: a 2D plane with infinite states was reduced to a finite 35-node graph by exploiting the fact that optimal paths can only bend at polygon vertices. The visibility graph was constructed by testing every pair of nodes for mutual visibility — an edge was added only if the connecting segment did not penetrate any obstacle interior (verified by sampling three interior points per candidate edge), yielding 111 valid edges.<br><br>Three best-first search variants shared a min-heap priority queue: <strong>A*</strong> with Euclidean distance heuristic f(n)=g(n)+h(n), <strong>Greedy BFS</strong> with f(n)=h(n) only, and <strong>UCS</strong> with f(n)=g(n) only.</div>
+        <div class="pb-text">Wrote the complete Methodology section and led the analysis for Problem 3.7. The key implementation insight: a 2D plane with infinite states was reduced to a finite 35-node graph by exploiting the fact that optimal paths can only bend at polygon vertices. The visibility graph was constructed by testing every pair of nodes for mutual visibility — an edge was added only if the connecting segment did not penetrate any obstacle interior (verified by sampling three interior points per candidate edge), yielding 111 valid edges.<br><br>Three best-first search variants shared a min-heap priority queue: A* with Euclidean distance heuristic f(n)=g(n)+h(n), Greedy BFS with f(n)=h(n) only, and UCS with f(n)=g(n) only.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Results & Analysis</div>
-        <div class="pb-text">A* and UCS both found the <strong>optimal cost of 13.342</strong>. That UCS matched A* exactly confirms the Euclidean heuristic is admissible — it never overestimates. Greedy reached a path costing 13.488 in just <strong>3 node expansions</strong>, rushing toward the goal without tracking accumulated cost. A* needed <strong>14 expansions</strong>; UCS needed <strong>31</strong>.<br><br>The 2.2× efficiency gain of A* over UCS came entirely from heuristic guidance — the same optimal answer, half the work. For Problem 3.9, BFS explored the 20-state graph level by level and returned the <strong>optimal 11-crossing solution</strong>. A visited set was mandatory because the graph contains cycles (moving a person across and back returns to a prior state), and without it the search loops indefinitely.</div>
+        <div class="pb-text">A* and UCS both found the optimal cost of 13.342. That UCS matched A* exactly confirms the Euclidean heuristic is admissible — it never overestimates. Greedy reached a path costing 13.488 in just 3 node expansions, rushing toward the goal without tracking accumulated cost. A* needed 14 expansions; UCS needed 31.<br><br>The 2.2× efficiency gain of A* over UCS came entirely from heuristic guidance — the same optimal answer, half the work. For Problem 3.9, BFS explored the 20-state graph level by level and returned the optimal 11-crossing solution. A visited set was mandatory because the graph contains cycles (moving a person across and back returns to a prior state), and without it the search loops indefinitely.</div>
       </div>
     </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">Reducing an infinite plane to 35 nodes before running any search was the decisive step — not which algorithm we chose. The best algorithm on a poorly formulated problem loses to a mediocre algorithm on a well-formulated one. Representation first, algorithm second.</span>
+    <div class="proj-downloads">
+      <span class="dl-label">Resources</span>
+      <div class="dl-links">
+        <a href="PA3/PA3_GrupoM.ipynb" download>Notebook</a>
+        <a href="PA3/Group_M_Solving_Problems_by_Search_1_.pdf" download>PDF Report</a>
+      </div>
     </div>
   </div>
-
+ 
   <!-- PA4 -->
   <div class="proj reveal" id="pa4">
     <div class="proj-top">
@@ -501,27 +492,30 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">Most Reliable Algorithm</span><span class="m-val">100% solved</span><span class="m-lbl">Random-Restart Hill Climbing solved every single trial on both problems</span></div>
-        <div class="metric"><span class="m-ctx">Simulated Annealing</span><span class="m-val">86% → 16%</span><span class="m-lbl">86% success on complex 8-queens, but only 16% on simpler 8-puzzle — landscape matters</span></div>
-        <div class="metric"><span class="m-ctx">Total Experiments</span><span class="m-val">400 runs</span><span class="m-lbl">4 algorithms × 2 problems × 50 trials each for statistically reliable results</span></div>
+        <div class="metric"><div class="m-ctx">Most Reliable Algorithm</div><span class="m-val">100% solved</span><span class="m-lbl">Random-Restart Hill Climbing solved every single trial on both problems</span></div>
+        <div class="metric"><div class="m-ctx">Simulated Annealing</div><span class="m-val">86% → 16%</span><span class="m-lbl">86% success on complex 8-queens, but only 16% on simpler 8-puzzle — landscape matters</span></div>
+        <div class="metric"><div class="m-ctx">Total Experiments</div><span class="m-val">400 runs</span><span class="m-lbl">4 algorithms × 2 problems × 50 trials each for statistically reliable results</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">What I Built</div>
-        <div class="pb-text">Designed the <strong>full experimental protocol</strong> and wrote the Methodology and Results sections. The 8-queens problem was modeled as a complete-state formulation: a tuple of 8 queen row positions, with negative attacking-pairs as the value function (maximum = 0 conflicts = solution). The 8-puzzle used negative Manhattan distance to the goal as its value function. All four algorithms were built on top of the UC Berkeley AIMA Python repository.<br><br>Randomized instances were generated carefully: 8-queens via random row assignments per column; 8-puzzle via 20 random legal moves from the goal state (guaranteeing solvability). Both metric types — percentage solved and average search cost (total candidate states evaluated) — were recorded per run, then aggregated per algorithm-problem pair into the master summary table.</div>
+        <div class="pb-text">Designed the full experimental protocol and wrote the Methodology and Results sections. The 8-queens problem was modeled as a complete-state formulation: a tuple of 8 queen row positions, with negative attacking-pairs as the value function (maximum = 0 conflicts = solution). The 8-puzzle used negative Manhattan distance to the goal as its value function. All four algorithms were built on top of the UC Berkeley AIMA Python repository.<br><br>Randomized instances were generated carefully: 8-queens via random row assignments per column; 8-puzzle via 20 random legal moves from the goal state (guaranteeing solvability). Both metric types — percentage solved and average search cost (total candidate states evaluated) — were recorded per run, then aggregated per algorithm-problem pair into the master summary table.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Results & Analysis</div>
-        <div class="pb-text">The starkest result: Simulated Annealing solved <strong>86% of 8-queens</strong> instances but only <strong>16% of 8-puzzle</strong> — a 70-point swing from the same algorithm on different problems. SA's temperature schedule allows it to escape local optima by occasionally accepting worse moves, which is exactly what the highly rugged 8-queens landscape needs. On 8-puzzle, that same randomness is expensive overhead when the landscape is smoother and directed search works fine.<br><br>RRHC was the only algorithm to hit <strong>100% on both problems</strong>, at the cost of higher total evaluations (cumulative across restarts). SAHC solved 68% of 8-puzzle cheaply (avg 13 evaluations) but only 20% of 8-queens — a classic local-optima trap. FCHC evaluated fewer states per step but got stuck just as often. The key lesson: no algorithm wins universally; every choice is a landscape-specific tradeoff.</div>
+        <div class="pb-text">The starkest result: Simulated Annealing solved 86% of 8-queens instances but only 16% of 8-puzzle — a 70-point swing from the same algorithm on different problems. SA's temperature schedule allows it to escape local optima by occasionally accepting worse moves, which is exactly what the highly rugged 8-queens landscape needs. On 8-puzzle, that same randomness is expensive overhead when the landscape is smoother and directed search works fine.<br><br>RRHC was the only algorithm to hit 100% on both problems, at the cost of higher total evaluations (cumulative across restarts). SAHC solved 68% of 8-puzzle cheaply (avg 13 evaluations) but only 20% of 8-queens — a classic local-optima trap. FCHC evaluated fewer states per step but got stuck just as often. The key lesson: no algorithm wins universally; every choice is a landscape-specific tradeoff.</div>
       </div>
     </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">Running 400 experiments made the algorithm-landscape interaction visceral. SA going from 86% to 16% on a different problem isn't a quirk — it's the central truth of local search. Choosing an algorithm without knowing the landscape structure is guessing.</span>
+    <div class="proj-downloads">
+      <span class="dl-label">Resources</span>
+      <div class="dl-links">
+        <a href="PA4/HW4_GroupM_excersise4-4.ipynb" download>Notebook</a>
+        <a href="PA4/Group_M_Solving_Beyond_Classical_Search_.pdf" download>PDF Report</a>
+      </div>
     </div>
   </div>
-
+ 
   <!-- CSP -->
   <div class="proj reveal" id="csp">
     <div class="proj-top">
@@ -540,27 +534,29 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">Approaches Compared</span><span class="m-val">3 encodings</span><span class="m-lbl">Position-based, House-based, and Boolean — same puzzle, three completely different models</span></div>
-        <div class="metric"><span class="m-ctx">Boolean Model Scale</span><span class="m-val">125 variables</span><span class="m-lbl">5 houses × 5 attributes × 5 values — powerful for solvers, unreadable for humans</span></div>
-        <div class="metric"><span class="m-ctx">Puzzle Complexity</span><span class="m-val">15 clues</span><span class="m-lbl">15 logical constraints that together uniquely determine one solution out of millions</span></div>
+        <div class="metric"><div class="m-ctx">Approaches Compared</div><span class="m-val">3 encodings</span><span class="m-lbl">Position-based, House-based, and Boolean — same puzzle, three completely different models</span></div>
+        <div class="metric"><div class="m-ctx">Boolean Model Scale</div><span class="m-val">125 variables</span><span class="m-lbl">5 houses × 5 attributes × 5 values — powerful for solvers, unreadable for humans</span></div>
+        <div class="metric"><div class="m-ctx">Puzzle Complexity</div><span class="m-val">15 clues</span><span class="m-lbl">15 logical constraints that together uniquely determine one solution out of millions</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">The Three Representations</div>
-        <div class="pb-text"><strong>Position-Based:</strong> Each attribute (color, nationality, drink, candy, pet) is a variable over house positions 1–5. Clues become arithmetic — "green is immediately right of ivory" → Green = Ivory + 1. ALLDiff constraints prevent duplicate assignments. Clean, compatible with MRV/LCV heuristics, readable. Identified as the most balanced overall.<br><br><strong>House-Based:</strong> Each house is an explicit tuple of attributes. Constraints are logical implications — "if yellow, then Kit Kat." Mirrors how humans reason with a 5×5 grid. Heavy on logical disjunctions but excellent for visualization and step-by-step explanation.<br><br><strong>Permutation/Boolean:</strong> 125 binary variables (5 houses × 5 attributes × 5 values). Every possible assignment is a yes/no question. Maps directly to SAT and ILP solvers (Google OR-Tools, Z3). Computationally powerful, scales to real optimization problems, but completely opaque to human inspection.</div>
+        <div class="pb-text">Position-Based: Each attribute (color, nationality, drink, candy, pet) is a variable over house positions 1–5. Clues become arithmetic — "green is immediately right of ivory" → Green = Ivory + 1. ALLDiff constraints prevent duplicate assignments. Clean, compatible with MRV/LCV heuristics, readable. Identified as the most balanced overall.<br><br>House-Based: Each house is an explicit tuple of attributes. Constraints are logical implications — "if yellow, then Kit Kat." Mirrors how humans reason with a 5×5 grid. Heavy on logical disjunctions but excellent for visualization and step-by-step explanation.<br><br>Permutation/Boolean: 125 binary variables (5 houses × 5 attributes × 5 values). Every possible assignment is a yes/no question. Maps directly to SAT and ILP solvers (Google OR-Tools, Z3). Computationally powerful, scales to real optimization problems, but completely opaque to human inspection.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Analysis & Conclusion</div>
-        <div class="pb-text">Each representation captures the same problem through a different lens, with a distinct position on the efficiency-explainability tradeoff:<br><br>The <strong>position model</strong> wins for balanced use — it's compact, supports algorithmic heuristics, and stays readable. It's the right choice for most solver implementations. The <strong>house model</strong> wins on pedagogical clarity — ideal for explaining reasoning step by step and for problems where human verification matters. The <strong>boolean model</strong> wins on raw power — it scales to industrial CSP problems (scheduling, circuit layout, resource allocation) where the solver, not the human, needs to understand the structure.<br><br>The deeper insight: a logic puzzle that looks trivial encodes the same mathematical structure as university timetabling and chip design. Representation isn't a cosmetic choice — it determines what algorithms can even be applied.</div>
+        <div class="pb-text">Each representation captures the same problem through a different lens, with a distinct position on the efficiency-explainability tradeoff:<br><br>The position model wins for balanced use — it's compact, supports algorithmic heuristics, and stays readable. It's the right choice for most solver implementations. The house model wins on pedagogical clarity — ideal for explaining reasoning step by step and for problems where human verification matters. The boolean model wins on raw power — it scales to industrial CSP problems (scheduling, circuit layout, resource allocation) where the solver, not the human, needs to understand the structure.<br><br>The deeper insight: a logic puzzle that looks trivial encodes the same mathematical structure as university timetabling and chip design. Representation isn't a cosmetic choice — it determines what algorithms can even be applied.</div>
       </div>
     </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">The boolean model was the hardest to read and the most powerful computationally — while the house model I initially dismissed as "too informal" was the one we kept returning to when explaining reasoning to each other. That tension between efficiency and explainability is a real engineering problem, not a textbook one.</span>
+    <div class="proj-downloads">
+      <span class="dl-label">Resources</span>
+      <div class="dl-links">
+        <a href="CSP/Group_M_-_CSP_simplified_1_.pdf" download>PDF Report</a>
+      </div>
     </div>
   </div>
-
+ 
   <!-- PA5 -->
   <div class="proj reveal" id="pa5">
     <div class="proj-top">
@@ -579,33 +575,36 @@
         </div>
       </div>
       <div class="proj-metrics">
-        <div class="metric"><span class="m-ctx">vs. Random Agent</span><span class="m-val">Won 92%</span><span class="m-lbl">46 wins out of 50 games — AI clearly outperforms unstructured play</span></div>
-        <div class="metric"><span class="m-ctx">vs. Rule-Based Agent</span><span class="m-val">Won 58%</span><span class="m-lbl">Beating a smart opponent 58% of the time shows genuine strategic reasoning</span></div>
-        <div class="metric"><span class="m-ctx">Winning Margin</span><span class="m-val">+31.2 pts avg</span><span class="m-lbl">Average score lead against random — not just winning, but winning decisively</span></div>
+        <div class="metric"><div class="m-ctx">vs. Random Agent</div><span class="m-val">92%</span><span class="m-lbl">Win rate vs. Random — 46 wins out of 50 games</span></div>
+        <div class="metric"><div class="m-ctx">vs. Rule-Based Agent</div><span class="m-val">58%</span><span class="m-lbl">Win rate vs. Rule-Based — consistently above chance against a smart opponent</span></div>
+        <div class="metric"><div class="m-ctx">Winning Margin</div><span class="m-val">+31.2 pts</span><span class="m-lbl">Average score lead against random — not just winning, but winning decisively</span></div>
       </div>
     </div>
     <div class="proj-body">
       <div class="pb-col">
         <div class="pb-label">What I Built</div>
-        <div class="pb-text">Designed the complete <strong>evaluation protocol</strong> and wrote the Methodology and Results sections. The matchup design swapped agent positions at game 25 of each 50-game set to control for first-move advantage — a standard technique in game AI evaluation that prevents position bias from masking true performance differences.<br><br>Three agents were tested: <strong>RandomAgent</strong> (uniform action sampling, baseline), <strong>HeuristicAgent</strong> (play low non-trump when leading; use minimum winning card on contested tricks), and <strong>AoCAgent</strong> (sample 15 opponent hands from unknown cards → depth-4 alpha-beta minimax on each → pick the action with highest average score). Performance was reported with 95% Wilson confidence intervals, average score margin, and standard deviation across all 50 games per matchup.</div>
+        <div class="pb-text">Designed the complete evaluation protocol and wrote the Methodology and Results sections. The matchup design swapped agent positions at game 25 of each 50-game set to control for first-move advantage — a standard technique in game AI evaluation that prevents position bias from masking true performance differences.<br><br>Three agents were tested: RandomAgent (uniform action sampling, baseline), HeuristicAgent (play low non-trump when leading; use minimum winning card on contested tricks), and AoCAgent (sample 15 opponent hands from unknown cards → depth-4 alpha-beta minimax on each → pick the action with highest average score). Performance was reported with 95% Wilson confidence intervals, average score margin, and standard deviation across all 50 games per matchup.</div>
       </div>
       <div class="pb-col">
         <div class="pb-label">Results & Analysis</div>
-        <div class="pb-text">The AoC agent achieved a <strong>92% win rate against Random</strong> (CI [80.7%, 97.3%], avg margin +31.2 points, σ=19.4). The fully-above-50% CI confirms this isn't luck — the agent genuinely outperforms unstructured play. The low standard deviation indicates stable performance across different card distributions.<br><br>Against the Heuristic, the win rate was <strong>58%</strong> (CI [44.4%, 70.6%], avg +7.4 pts, σ=24.1). The CI touches 50%, reflecting the honest limits of a 50-game sample — and that the heuristic is a real opponent. AoC's edge appears mainly in mid-game positions where rigid rules fail: it samples possible opponent hands and identifies plays that the heuristic's fixed logic would miss. Performance stabilized at 10–15 sampled determinizations, a practical balance between decision quality and runtime for a 40-card game.</div>
+        <div class="pb-text">The AoC agent achieved a 92% win rate against Random (CI [80.7%, 97.3%], avg margin +31.2 points, σ=19.4). The fully-above-50% CI confirms this isn't luck — the agent genuinely outperforms unstructured play. The low standard deviation indicates stable performance across different card distributions.<br><br>Against the Heuristic, the win rate was 58% (CI [44.4%, 70.6%], avg +7.4 pts, σ=24.1). The CI touches 50%, reflecting the honest limits of a 50-game sample — and that the heuristic is a real opponent. AoC's edge appears mainly in mid-game positions where rigid rules fail: it samples possible opponent hands and identifies plays that the heuristic's fixed logic would miss. Performance stabilized at 10–15 sampled determinizations, a practical balance between decision quality and runtime for a 40-card game.</div>
       </div>
     </div>
-    <div class="proj-reflection">
-      <span class="refl-label">Takeaway</span>
-      <span class="refl-text">Building an agent that plays a real card game under genuine hidden information was the hardest and most satisfying project of the semester. The 58% win rate against the heuristic — not a blowout, but consistently above chance — showed the agent was doing real strategic reasoning, not just outperforming a weak baseline.</span>
+    <div class="proj-downloads">
+      <span class="dl-label">Resources</span>
+      <div class="dl-links">
+        <a href="PA5/briscas_ai_jupyter_notebook.ipynb" download>Notebook</a>
+        <a href="PA5/Group_M_-_Adversarial_Search.pdf" download>PDF Report</a>
+      </div>
     </div>
   </div>
-
+ 
   </div><!-- end projects -->
 </div>
 </div>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- SKILLS -->
 <div class="section" id="skills">
 <div class="inner">
@@ -621,20 +620,19 @@
     <div class="skill-card"><div class="sk-name">Local Search & Optimization</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="82%"></div></div><div class="sk-note">Implemented HC variants and SA across 400 experiments. Can explain algorithm–landscape fit empirically, not just theoretically.</div></div>
     <div class="skill-card"><div class="sk-name">Game AI & Adversarial Search</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="80%"></div></div><div class="sk-note">AoC + alpha-beta minimax under partial observability. Statistically rigorous win-rate evaluation with CIs.</div></div>
     <div class="skill-card"><div class="sk-name">Agent Design (PEAS)</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="79%"></div></div><div class="sk-note">Reflex, random, and model-based agents compared empirically. Understanding of when complexity helps vs. hurts.</div></div>
-
     <div class="skill-card"><div class="sk-name">Technical Writing & Analysis</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="86%"></div></div><div class="sk-note">Wrote methodology and results for three assignments. Data-first interpretation — results lead, not the hypothesis.</div></div>
   </div>
 </div>
 </div>
-
+ 
 <div class="divider"></div>
-
+ 
 <div style="padding: 20px 64px; background: var(--bg); border-top: 1px solid var(--rule); text-align: center;">
   <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--ink-3); letter-spacing:0.04em;">
-    AI tools were used for minor grammar and wording assistance in the written descriptions of this portfolio.
+    AI tools were used for grammar and wording assistance in the written descriptions of this portfolio.
   </p>
 </div>
-
+ 
 <footer>
   <div>
     <div class="ft-name">Malik J. Páramo Ríos</div>
@@ -646,13 +644,13 @@
     <div>University of Puerto Rico, Mayagüez</div>
   </div>
 </footer>
-
+ 
 <script>
   const io = new IntersectionObserver(es => {
     es.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.07 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
+ 
   const bar = new IntersectionObserver(es => {
     es.forEach(e => {
       if (e.isIntersecting) {

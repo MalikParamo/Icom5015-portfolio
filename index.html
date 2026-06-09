@@ -354,243 +354,237 @@
 
   <div class="projects">
 
-    <!-- PA1 -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num">1</div>
-        <div class="proj-info">
-          <div class="proj-date">Feb 25 2026 &nbsp;·&nbsp; Numerical Computing</div>
-          <div class="proj-title">Pure Python vs. NumPy — Performance Benchmarking</div>
-          <div class="proj-lead">Implemented element-wise 1-D vector multiplication and true 2-D matrix multiplication in both pure Python and NumPy, then measured median runtime across 15 trials at five input sizes to quantify the performance gap and explain the architectural reasons behind it.</div>
-          <div class="tags">
-            <span class="tag t-red">NumPy Vectorization</span>
-            <span class="tag t-red">Benchmarking</span>
-            <span class="tag t-grey">Python</span>
-            <span class="tag t-grey">O(n³) Analysis</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">7,288×</span><span class="m-lbl">Peak speedup at 500×500 matrix</span></div>
-          <div class="metric"><span class="m-val">33×</span><span class="m-lbl">Speedup at 500-element vector</span></div>
-          <div class="metric"><span class="m-val">15</span><span class="m-lbl">Timed trials per data point</span></div>
+  <!-- PA1 -->
+  <div class="proj reveal" id="pa1">
+    <div class="proj-top">
+      <div class="proj-num">1</div>
+      <div class="proj-info">
+        <div class="proj-date">Feb 25 2026 &nbsp;·&nbsp; Numerical Computing &nbsp;·&nbsp; Python / NumPy</div>
+        <div class="proj-title">Pure Python vs. NumPy — Performance Benchmarking</div>
+        <div class="proj-lead">A rigorous performance study comparing pure Python loop-based computation against NumPy vectorized operations for element-wise vector multiplication (1-D) and true matrix multiplication (2-D). Both tasks were benchmarked at five input sizes from n=10 to n=500, with 15 timed trials each, one warm-up run, a fixed random seed, and correctness verified via <code>np.allclose</code> before any timing was recorded.</div>
+        <div class="tags">
+          <span class="tag t-red">NumPy Vectorization</span>
+          <span class="tag t-red">Benchmarking</span>
+          <span class="tag t-grey">O(n) vs O(n³)</span>
+          <span class="tag t-grey">BLAS / Cache Locality</span>
+          <span class="tag t-grey">Median Timing</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Built <strong>py_elementwise</strong> and <strong>np_elementwise</strong> — the 1-D vector multiplication functions for both implementations. The Python version uses an explicit loop over paired elements O(n); the NumPy version uses the native <code>a*b</code> vectorized operator. Both functions fed into a shared <code>median_time</code> benchmarking harness with warm-up runs and a fixed random seed.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">The speedup for 1-D operations grew from <strong>1.1× at n=10</strong> to <strong>33× at n=500</strong>, while matrix multiplication hit <strong>7,288×</strong> at 500×500 — consistent with the O(n³) interpreter overhead of nested Python loops vs. BLAS-backed NumPy and its contiguous memory layout. Big-O alone doesn't capture the constant factor difference.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="PA1/Group M programming python fast or slow.ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">Matrix Multiplication</span><span class="m-val">7,288× faster</span><span class="m-lbl">NumPy vs. Python at 500×500 — same math, entirely different speed</span></div>
+        <div class="metric"><span class="m-ctx">Vector Multiplication</span><span class="m-val">33× faster</span><span class="m-lbl">NumPy vs. Python at 500 elements — gap grows with input size</span></div>
+        <div class="metric"><span class="m-ctx">Measurement Rigor</span><span class="m-val">15 timed runs</span><span class="m-lbl">Per data point, with 1 warm-up run and a fixed random seed for fairness</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">What I Built</div>
+        <div class="pb-text">Implemented <strong>py_elementwise</strong> and <strong>np_elementwise</strong> — the two core 1-D vector multiplication functions. The Python version loops explicitly over paired elements at O(n); the NumPy version uses the native <code>a*b</code> vectorized operator. Both fed into a shared <code>median_time</code> benchmarking harness that handled warm-up, trial repetition, and timing isolation so all comparisons were fair across implementations.<br><br>The experiment design used five input sizes [10, 50, 100, 200, 500], applied to both 1-D and 2-D operations, yielding 20 data points in total. Each was run independently per function and recorded to a results table before any analysis began.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Results & Analysis</div>
+        <div class="pb-text">The 1-D speedup grew from <strong>1.1× at n=10</strong> to <strong>33× at n=500</strong> — slowly at first because fixed overhead (timer resolution, function calls) dominates small inputs. The matrix multiplication gap was far more dramatic: <strong>7,288× at 500×500</strong>, driven by the O(n³) compounding of loop overhead vs. BLAS-backed NumPy.<br><br>The root cause is twofold: NumPy executes in compiled C/Fortran with no Python interpreter overhead per iteration, and stores data contiguously in memory, enabling CPU cache reuse. Python lists use pointer indirection, causing cache misses on every element access in a nested loop. The practical lesson: O(n) and O(n³) implementations that look equivalent in theory diverge catastrophically in wall-clock time at scale.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">A 7,000× gap for the same mathematical operation changed how I evaluate code before writing it. Big-O complexity describes growth rate, not absolute speed. Library choice, memory layout, and interpreter overhead are first-class engineering decisions.</span>
+    </div>
+  </div>
 
-    <!-- PA2 -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num">2</div>
-        <div class="proj-info">
-          <div class="proj-date">Mar 6 2026 &nbsp;·&nbsp; Intelligent Agents</div>
-          <div class="proj-title">Rational Agent Design — PEAS Framework</div>
-          <div class="proj-lead">Designed and compared three agent architectures — Simple Reflex, Random, and Model-Based with DFS exploration — across a two-location vacuum world and a 2D grid environment with obstacles. Ran 50 randomized trials and a constrained corridor experiment to isolate policy differences.</div>
-          <div class="tags">
-            <span class="tag t-red">PEAS Framework</span>
-            <span class="tag t-red">Model-Based Agent</span>
-            <span class="tag t-grey">DFS Exploration</span>
-            <span class="tag t-grey">Simulation</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">3,279</span><span class="m-lbl">Model-based score in corridor</span></div>
-          <div class="metric"><span class="m-val">50</span><span class="m-lbl">Randomized trials</span></div>
-          <div class="metric"><span class="m-val">3</span><span class="m-lbl">Agent types compared</span></div>
+  <!-- PA2 -->
+  <div class="proj reveal" id="pa2">
+    <div class="proj-top">
+      <div class="proj-num">2</div>
+      <div class="proj-info">
+        <div class="proj-date">Mar 6 2026 &nbsp;·&nbsp; Intelligent Agents &nbsp;·&nbsp; Python / PEAS</div>
+        <div class="proj-title">Rational Agent Design — Comparing Reflex, Random, and Model-Based Agents</div>
+        <div class="proj-lead">Designed and ran a controlled comparison of three agent architectures — Simple Reflex, Random, and a Model-Based DFS exploration agent — across two environments: a two-location vacuum world and a 2D grid with obstacles. Ran 50 randomized trials per agent and a constrained 1×18 corridor experiment to isolate policy differences from environment variability.</div>
+        <div class="tags">
+          <span class="tag t-red">PEAS Framework</span>
+          <span class="tag t-red">Model-Based Agent</span>
+          <span class="tag t-grey">DFS Exploration</span>
+          <span class="tag t-grey">Fixed Horizon Evaluation</span>
+          <span class="tag t-grey">Cumulative Score</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Designed the <strong>experimental framework</strong>: fixed the time horizon, randomized initial conditions, and defined cumulative score as the evaluation metric. Co-implemented the two-location vacuum world (Exercise 2.11), building the environment loop, percept generator, and scoring function that all three agents used.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">The model-based agent <strong>underperformed the simple reflex agent</strong> in small random grids (2322 vs. 2462 mean score) but <strong>dominated in the corridor</strong> (3279 vs. 1939). Agent complexity must match the environment's geometry — systematic DFS exploration is a liability when the space is small enough that random movement already covers it.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="PA2/Grupo M Agents .ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">Best Agent in Corridor</span><span class="m-val">Score: 3,279</span><span class="m-lbl">Model-based agent dominated the tight 1×18 hallway by learning blocked directions</span></div>
+        <div class="metric"><span class="m-ctx">Best Agent in Open Grid</span><span class="m-val">Score: 2,462</span><span class="m-lbl">Simple Reflex agent won on open 2D grids — fewer wasted moves than DFS</span></div>
+        <div class="metric"><span class="m-ctx">Experiment Size</span><span class="m-val">50 trials</span><span class="m-lbl">Randomized start positions and dirt each run to eliminate bias</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">What I Built</div>
+        <div class="pb-text">Designed the <strong>experimental framework</strong> for the two-location world: fixed a 20-step horizon, randomized starting position and dirt configuration at each trial, and defined cumulative score (cleaning bonus minus action cost) as the metric. Co-implemented Exercise 2.11 — the environment loop, percept generator, and transition function that all agents shared.<br><br>The three agents operated on identical state information. The <strong>Simple Reflex</strong> agent follows one rule: SUCK if dirty, else move. The <strong>Random</strong> agent samples uniformly from all actions. The <strong>Model-Based</strong> agent builds an internal map, performs DFS, and avoids retrying blocked directions.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Results & Analysis</div>
+        <div class="pb-text">In a single run both agents started at A with both squares dirty. The reflex agent scored <strong>28</strong>; the random agent scored <strong>12</strong> — a 57% gap — because the random agent wasted moves on walls, repeated visits, and NOOPs before finally cleaning B at step 19.<br><br>Across 50 trials the gap narrowed to 34.18 vs 32.84 because when squares start clean, the reflex agent's early-cleaning advantage disappears. In the <strong>2D grid</strong>, reflex (2462) beat model-based (2322) on average — systematic DFS cost too many steps in small open spaces. But in the <strong>1×18 corridor</strong>, model-based dominated (3279 vs 1939) by learning UP/DOWN were blocked and never wasting moves on them again. The right agent depends entirely on the environment's geometry.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">Smarter doesn't always mean better. A model-based agent that systematically avoids wasted moves is a liability in open spaces but a decisive advantage when the environment has structure that can be learned and exploited.</span>
+    </div>
+  </div>
 
-    <!-- PA3 -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num">3</div>
-        <div class="proj-info">
-          <div class="proj-date">Apr 22 2026 &nbsp;·&nbsp; Search Algorithms</div>
-          <div class="proj-title">Solving Problems by Search — Visibility Graph Navigation</div>
-          <div class="proj-lead">Reduced a continuous obstacle-filled plane to a 35-node visibility graph and compared A*, Greedy BFS, and UCS on finding the shortest path. Separately modeled the missionaries and cannibals problem as a finite 20-state graph and solved it optimally with BFS.</div>
-          <div class="tags">
-            <span class="tag t-red">A* Search</span>
-            <span class="tag t-red">Visibility Graph</span>
-            <span class="tag t-grey">UCS · Greedy BFS</span>
-            <span class="tag t-grey">BFS</span>
-            <span class="tag t-grey">Heuristics</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">13.342</span><span class="m-lbl">Optimal path cost (A* and UCS)</span></div>
-          <div class="metric"><span class="m-val">14</span><span class="m-lbl">Nodes expanded by A*</span></div>
-          <div class="metric"><span class="m-val">11</span><span class="m-lbl">Optimal river crossings (BFS)</span></div>
+  <!-- PA3 -->
+  <div class="proj reveal" id="pa3">
+    <div class="proj-top">
+      <div class="proj-num">3</div>
+      <div class="proj-info">
+        <div class="proj-date">Apr 22 2026 &nbsp;·&nbsp; Search Algorithms &nbsp;·&nbsp; Python / Matplotlib</div>
+        <div class="proj-title">Search in the Real World — Visibility Graph Navigation & Missionaries Problem</div>
+        <div class="proj-lead">Two classical search problems tackled back to back. Problem 3.7: navigating a continuous plane filled with polygonal obstacles by reducing the infinite space to a 35-node visibility graph, then comparing A*, Greedy BFS, and UCS head to head. Problem 3.9: modeling the Missionaries and Cannibals river-crossing puzzle as a 20-state finite graph and finding the optimal 11-step solution with BFS.</div>
+        <div class="tags">
+          <span class="tag t-red">A* Search</span>
+          <span class="tag t-red">Visibility Graph</span>
+          <span class="tag t-grey">UCS · Greedy BFS</span>
+          <span class="tag t-grey">Breadth-First Search</span>
+          <span class="tag t-grey">Admissible Heuristics</span>
+          <span class="tag t-grey">State Space Design</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Wrote the full <strong>methodology</strong> and led the <strong>analysis for Problem 3.7</strong> — the visibility graph experiment. This included explaining the reduction from infinite continuous space to 35 nodes, documenting the 111-edge graph construction (obstacle penetration tested via 3 interior sample points), and interpreting the node-expansion comparison between all three algorithms.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">A* expanded <strong>14 nodes</strong>; UCS needed <strong>31</strong> to confirm the same optimal path; Greedy found a slightly worse path in only <strong>3 expansions</strong>. UCS matching A*'s path cost confirmed the heuristic is admissible. The key insight: reducing an intractable continuous problem to a finite graph before searching is often more impactful than algorithm choice.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="PA3/PA3_GrupoM.ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">Shortest Path Found</span><span class="m-val">Cost: 13.342</span><span class="m-lbl">A* and UCS both confirmed this as optimal; Greedy found 13.488 (suboptimal)</span></div>
+        <div class="metric"><span class="m-ctx">A* Efficiency</span><span class="m-val">14 vs 31 nodes</span><span class="m-lbl">A* expanded 14 nodes to find the answer; UCS needed 31 — same result, 2× the work</span></div>
+        <div class="metric"><span class="m-ctx">River Crossing Puzzle</span><span class="m-val">11 crossings</span><span class="m-lbl">BFS found the minimum moves to safely cross all missionaries and cannibals</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">What I Built</div>
+        <div class="pb-text">Wrote the complete <strong>Methodology section</strong> and led the <strong>analysis for Problem 3.7</strong>. The key implementation insight: a 2D plane with infinite states was reduced to a finite 35-node graph by exploiting the fact that optimal paths can only bend at polygon vertices. The visibility graph was constructed by testing every pair of nodes for mutual visibility — an edge was added only if the connecting segment did not penetrate any obstacle interior (verified by sampling three interior points per candidate edge), yielding 111 valid edges.<br><br>Three best-first search variants shared a min-heap priority queue: <strong>A*</strong> with Euclidean distance heuristic f(n)=g(n)+h(n), <strong>Greedy BFS</strong> with f(n)=h(n) only, and <strong>UCS</strong> with f(n)=g(n) only.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Results & Analysis</div>
+        <div class="pb-text">A* and UCS both found the <strong>optimal cost of 13.342</strong>. That UCS matched A* exactly confirms the Euclidean heuristic is admissible — it never overestimates. Greedy reached a path costing 13.488 in just <strong>3 node expansions</strong>, rushing toward the goal without tracking accumulated cost. A* needed <strong>14 expansions</strong>; UCS needed <strong>31</strong>.<br><br>The 2.2× efficiency gain of A* over UCS came entirely from heuristic guidance — the same optimal answer, half the work. For Problem 3.9, BFS explored the 20-state graph level by level and returned the <strong>optimal 11-crossing solution</strong>. A visited set was mandatory because the graph contains cycles (moving a person across and back returns to a prior state), and without it the search loops indefinitely.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">Reducing an infinite plane to 35 nodes before running any search was the decisive step — not which algorithm we chose. The best algorithm on a poorly formulated problem loses to a mediocre algorithm on a well-formulated one. Representation first, algorithm second.</span>
+    </div>
+  </div>
 
-    <!-- PA4 -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num">4</div>
-        <div class="proj-info">
-          <div class="proj-date">Apr 28 2026 &nbsp;·&nbsp; Local Search</div>
-          <div class="proj-title">Beyond Classical Search — Local Search Algorithms</div>
-          <div class="proj-lead">Ran 400 experiments comparing steepest-ascent hill climbing, first-choice HC, random-restart HC, and simulated annealing on the 8-queens and 8-puzzle problems. Measured success rate and average search cost to understand how algorithm choice interacts with problem structure.</div>
-          <div class="tags">
-            <span class="tag t-red">Hill Climbing</span>
-            <span class="tag t-red">Simulated Annealing</span>
-            <span class="tag t-grey">8-Queens</span>
-            <span class="tag t-grey">8-Puzzle</span>
-            <span class="tag t-grey">AIMA Repository</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">100%</span><span class="m-lbl">Random-restart success (both)</span></div>
-          <div class="metric"><span class="m-val">86%</span><span class="m-lbl">Simulated annealing on 8-queens</span></div>
-          <div class="metric"><span class="m-val">400</span><span class="m-lbl">Total experimental runs</span></div>
+  <!-- PA4 -->
+  <div class="proj reveal" id="pa4">
+    <div class="proj-top">
+      <div class="proj-num">4</div>
+      <div class="proj-info">
+        <div class="proj-date">Apr 28 2026 &nbsp;·&nbsp; Local Search &nbsp;·&nbsp; Python / UC Berkeley AIMA</div>
+        <div class="proj-title">Local Search Showdown — Hill Climbing, Random Restart & Simulated Annealing</div>
+        <div class="proj-lead">A 400-run experiment comparing four local search algorithms — steepest-ascent hill climbing (SAHC), first-choice hill climbing (FCHC), random-restart hill climbing (RRHC), and simulated annealing (SA) — on two benchmark problems with different landscape structures: the 8-queens problem (complex, many local optima) and the 8-puzzle (simpler, directed). Each algorithm ran 50 independent trials per problem, measuring both success rate and average search cost.</div>
+        <div class="tags">
+          <span class="tag t-red">Hill Climbing (3 variants)</span>
+          <span class="tag t-red">Simulated Annealing</span>
+          <span class="tag t-grey">8-Queens · 8-Puzzle</span>
+          <span class="tag t-grey">Success Rate</span>
+          <span class="tag t-grey">Search Cost</span>
+          <span class="tag t-grey">Manhattan Distance Heuristic</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Designed the <strong>experimental protocol</strong> — 50 independent trials per algorithm per problem, recording both whether the goal was reached and total candidate states evaluated — and wrote the <strong>Methodology and Results</strong> sections. Generated the master comparison table covering all eight algorithm-problem combinations and co-authored the interpretation of why SA succeeds on 8-queens but fails on 8-puzzle.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">SA solved <strong>86% of 8-queens</strong> instances but only <strong>16% of 8-puzzle</strong>. SA's willingness to accept worse moves is an advantage in high-optima, many-local-minima spaces but costly overhead on the more directed 8-puzzle. Random-restart HC was the only algorithm to hit 100% on both, proving that diversification reliably beats clever local moves when the landscape is unknown.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="PA4/HW4_GroupM_excersise4-4.ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">Most Reliable Algorithm</span><span class="m-val">100% solved</span><span class="m-lbl">Random-Restart Hill Climbing solved every single trial on both problems</span></div>
+        <div class="metric"><span class="m-ctx">Simulated Annealing</span><span class="m-val">86% → 16%</span><span class="m-lbl">86% success on complex 8-queens, but only 16% on simpler 8-puzzle — landscape matters</span></div>
+        <div class="metric"><span class="m-ctx">Total Experiments</span><span class="m-val">400 runs</span><span class="m-lbl">4 algorithms × 2 problems × 50 trials each for statistically reliable results</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">What I Built</div>
+        <div class="pb-text">Designed the <strong>full experimental protocol</strong> and wrote the Methodology and Results sections. The 8-queens problem was modeled as a complete-state formulation: a tuple of 8 queen row positions, with negative attacking-pairs as the value function (maximum = 0 conflicts = solution). The 8-puzzle used negative Manhattan distance to the goal as its value function. All four algorithms were built on top of the UC Berkeley AIMA Python repository.<br><br>Randomized instances were generated carefully: 8-queens via random row assignments per column; 8-puzzle via 20 random legal moves from the goal state (guaranteeing solvability). Both metric types — percentage solved and average search cost (total candidate states evaluated) — were recorded per run, then aggregated per algorithm-problem pair into the master summary table.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Results & Analysis</div>
+        <div class="pb-text">The starkest result: Simulated Annealing solved <strong>86% of 8-queens</strong> instances but only <strong>16% of 8-puzzle</strong> — a 70-point swing from the same algorithm on different problems. SA's temperature schedule allows it to escape local optima by occasionally accepting worse moves, which is exactly what the highly rugged 8-queens landscape needs. On 8-puzzle, that same randomness is expensive overhead when the landscape is smoother and directed search works fine.<br><br>RRHC was the only algorithm to hit <strong>100% on both problems</strong>, at the cost of higher total evaluations (cumulative across restarts). SAHC solved 68% of 8-puzzle cheaply (avg 13 evaluations) but only 20% of 8-queens — a classic local-optima trap. FCHC evaluated fewer states per step but got stuck just as often. The key lesson: no algorithm wins universally; every choice is a landscape-specific tradeoff.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">Running 400 experiments made the algorithm-landscape interaction visceral. SA going from 86% to 16% on a different problem isn't a quirk — it's the central truth of local search. Choosing an algorithm without knowing the landscape structure is guessing.</span>
+    </div>
+  </div>
 
-    <!-- CSP -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num accent">★</div>
-        <div class="proj-info">
-          <div class="proj-date">May 8 2026 &nbsp;·&nbsp; Constraint Satisfaction</div>
-          <div class="proj-title">CSP Simplified — Modeling Einstein's Riddle</div>
-          <div class="proj-lead">Modeled the Zebra Puzzle as a Constraint Satisfaction Problem using three distinct representations — Position-Based, House-Based, and Permutation/Boolean — and analyzed each for solver efficiency, human readability, and compatibility with SAT/ILP systems.</div>
-          <div class="tags">
-            <span class="tag t-red">CSP</span>
-            <span class="tag t-red">Constraint Propagation</span>
-            <span class="tag t-grey">MRV · LCV</span>
-            <span class="tag t-grey">SAT / ILP</span>
-            <span class="tag t-grey">Backtracking</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">3</span><span class="m-lbl">Representations analyzed</span></div>
-          <div class="metric"><span class="m-val">125</span><span class="m-lbl">Binary vars (permutation model)</span></div>
-          <div class="metric"><span class="m-val">5×5</span><span class="m-lbl">Constraint matrix structure</span></div>
+  <!-- CSP -->
+  <div class="proj reveal" id="csp">
+    <div class="proj-top">
+      <div class="proj-num accent">★</div>
+      <div class="proj-info">
+        <div class="proj-date">May 8 2026 &nbsp;·&nbsp; Constraint Satisfaction &nbsp;·&nbsp; Analytical Report</div>
+        <div class="proj-title">CSP Simplified — Three Ways to Model Einstein's Riddle</div>
+        <div class="proj-lead">An analytical deep-dive into Constraint Satisfaction Problems using the Einstein Zebra Puzzle as the test case. The same puzzle was modeled three ways — Position-Based, House-Based, and Permutation/Boolean — and each representation was evaluated for computational efficiency, human readability, heuristic compatibility (MRV/LCV), and compatibility with industrial solvers (SAT, ILP). The goal: understand how representation choice drives solver performance, not just correctness.</div>
+        <div class="tags">
+          <span class="tag t-red">CSP Formulation</span>
+          <span class="tag t-red">Constraint Propagation</span>
+          <span class="tag t-grey">MRV · LCV Heuristics</span>
+          <span class="tag t-grey">SAT / ILP Compatibility</span>
+          <span class="tag t-grey">Backtracking</span>
+          <span class="tag t-grey">ALLDiff Constraints</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Participated in the comparative analysis of all three encodings. The <strong>position-based model</strong> (variables = house positions 1–5, adjacency as arithmetic) was identified as most balanced — compact, compatible with MRV/LCV heuristics, and readable. The <strong>boolean model</strong> (125 binary variables, SAT-compatible) offered raw computational power at the cost of total opacity.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">Each representation captures the same problem through a different lens: the <strong>house model</strong> mirrors human reasoning; the <strong>position model</strong> is the most balanced for algorithmic implementation; the <strong>boolean model</strong> scales to industrial CSP solvers. The choice isn't about which is correct — it's about which fits the goal, whether that's explainability, efficiency, or scalability.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="Simplified/PA3_GrupoM.ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">Approaches Compared</span><span class="m-val">3 encodings</span><span class="m-lbl">Position-based, House-based, and Boolean — same puzzle, three completely different models</span></div>
+        <div class="metric"><span class="m-ctx">Boolean Model Scale</span><span class="m-val">125 variables</span><span class="m-lbl">5 houses × 5 attributes × 5 values — powerful for solvers, unreadable for humans</span></div>
+        <div class="metric"><span class="m-ctx">Puzzle Complexity</span><span class="m-val">15 clues</span><span class="m-lbl">15 logical constraints that together uniquely determine one solution out of millions</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">The Three Representations</div>
+        <div class="pb-text"><strong>Position-Based:</strong> Each attribute (color, nationality, drink, candy, pet) is a variable over house positions 1–5. Clues become arithmetic — "green is immediately right of ivory" → Green = Ivory + 1. ALLDiff constraints prevent duplicate assignments. Clean, compatible with MRV/LCV heuristics, readable. Identified as the most balanced overall.<br><br><strong>House-Based:</strong> Each house is an explicit tuple of attributes. Constraints are logical implications — "if yellow, then Kit Kat." Mirrors how humans reason with a 5×5 grid. Heavy on logical disjunctions but excellent for visualization and step-by-step explanation.<br><br><strong>Permutation/Boolean:</strong> 125 binary variables (5 houses × 5 attributes × 5 values). Every possible assignment is a yes/no question. Maps directly to SAT and ILP solvers (Google OR-Tools, Z3). Computationally powerful, scales to real optimization problems, but completely opaque to human inspection.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Analysis & Conclusion</div>
+        <div class="pb-text">Each representation captures the same problem through a different lens, with a distinct position on the efficiency-explainability tradeoff:<br><br>The <strong>position model</strong> wins for balanced use — it's compact, supports algorithmic heuristics, and stays readable. It's the right choice for most solver implementations. The <strong>house model</strong> wins on pedagogical clarity — ideal for explaining reasoning step by step and for problems where human verification matters. The <strong>boolean model</strong> wins on raw power — it scales to industrial CSP problems (scheduling, circuit layout, resource allocation) where the solver, not the human, needs to understand the structure.<br><br>The deeper insight: a logic puzzle that looks trivial encodes the same mathematical structure as university timetabling and chip design. Representation isn't a cosmetic choice — it determines what algorithms can even be applied.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">The boolean model was the hardest to read and the most powerful computationally — while the house model I initially dismissed as "too informal" was the one we kept returning to when explaining reasoning to each other. That tension between efficiency and explainability is a real engineering problem, not a textbook one.</span>
+    </div>
+  </div>
 
-    <!-- PA5 -->
-    <div class="proj reveal">
-      <div class="proj-top">
-        <div class="proj-num">5</div>
-        <div class="proj-info">
-          <div class="proj-date">May 18 2026 &nbsp;·&nbsp; Adversarial Search</div>
-          <div class="proj-title">Briscas AI — Adversarial Card Game Agent</div>
-          <div class="proj-lead">Built an AI agent for the two-player Spanish card game Briscas using Averaging over Clairvoyance: sampling 15 possible opponent hands and evaluating each via depth-4 minimax with alpha-beta pruning. Evaluated against a random and a rule-based heuristic agent across 150 total games.</div>
-          <div class="tags">
-            <span class="tag t-red">Minimax · Alpha-Beta</span>
-            <span class="tag t-red">Monte Carlo Sampling</span>
-            <span class="tag t-grey">Partial Observability</span>
-            <span class="tag t-grey">PettingZoo</span>
-            <span class="tag t-grey">Game AI</span>
-          </div>
-        </div>
-        <div class="proj-metrics">
-          <div class="metric"><span class="m-val">92%</span><span class="m-lbl">Win rate vs. random agent</span></div>
-          <div class="metric"><span class="m-val">58%</span><span class="m-lbl">Win rate vs. heuristic agent</span></div>
-          <div class="metric"><span class="m-val">+31.2</span><span class="m-lbl">Avg. score margin vs. random</span></div>
+  <!-- PA5 -->
+  <div class="proj reveal" id="pa5">
+    <div class="proj-top">
+      <div class="proj-num">5</div>
+      <div class="proj-info">
+        <div class="proj-date">May 18 2026 &nbsp;·&nbsp; Adversarial Search &nbsp;·&nbsp; Python / PettingZoo</div>
+        <div class="proj-title">Briscas AI — Building a Card Game Agent Under Hidden Information</div>
+        <div class="proj-lead">Implemented a full two-player AI agent for Briscas, a Spanish trick-taking card game, using the Averaging over Clairvoyance (AoC) method: sample 15 plausible opponent hands from the unknown cards, evaluate each via depth-4 minimax with alpha-beta pruning, and select the action with the highest average expected score. The game environment was built with PettingZoo's AEC (Agent-Environment Cycle) framework and evaluated across 150 total games against two opponents.</div>
+        <div class="tags">
+          <span class="tag t-red">Minimax · Alpha-Beta Pruning</span>
+          <span class="tag t-red">Monte Carlo / AoC Sampling</span>
+          <span class="tag t-grey">Partial Observability</span>
+          <span class="tag t-grey">PettingZoo AECEnv</span>
+          <span class="tag t-grey">Confidence Intervals</span>
+          <span class="tag t-grey">Win Rate Analysis</span>
         </div>
       </div>
-      <div class="proj-body">
-        <div class="pb-col">
-          <div class="pb-label">What I Did</div>
-          <div class="pb-text">Designed the <strong>evaluation protocol</strong> — 50 games per matchup with player positions swapped at game 25 to control for first-move advantage — and wrote the <strong>Methodology and Results</strong> sections. Produced the performance summary table with 95% confidence intervals, and wrote the statistical analysis explaining what the win-rate CIs do and don't prove with a 50-game sample.</div>
-        </div>
-        <div class="pb-col">
-          <div class="pb-label">Key Finding</div>
-          <div class="pb-text">The AoC agent achieved a <strong>92% win rate vs. random</strong> (CI [80.7%, 97.3%]) and <strong>58% vs. the heuristic</strong> (CI [44.4%, 70.6%]). The 58% result is the meaningful one — it shows the agent is doing genuine strategic reasoning against a structured opponent, not just exploiting weak play. Performance stabilized at 10–15 opponent hand samples, balancing accuracy and runtime.</div>
-        </div>
-      </div>
-      <div class="proj-downloads">
-        <span class="dl-label">Resources</span>
-        <div class="dl-links">
-          <a href="PA5/briscas_ai_jupyter_notebook.ipynb" download>Download Notebook</a>
-        </div>
+      <div class="proj-metrics">
+        <div class="metric"><span class="m-ctx">vs. Random Agent</span><span class="m-val">Won 92%</span><span class="m-lbl">46 wins out of 50 games — AI clearly outperforms unstructured play</span></div>
+        <div class="metric"><span class="m-ctx">vs. Rule-Based Agent</span><span class="m-val">Won 58%</span><span class="m-lbl">Beating a smart opponent 58% of the time shows genuine strategic reasoning</span></div>
+        <div class="metric"><span class="m-ctx">Winning Margin</span><span class="m-val">+31.2 pts avg</span><span class="m-lbl">Average score lead against random — not just winning, but winning decisively</span></div>
       </div>
     </div>
+    <div class="proj-body">
+      <div class="pb-col">
+        <div class="pb-label">What I Built</div>
+        <div class="pb-text">Designed the complete <strong>evaluation protocol</strong> and wrote the Methodology and Results sections. The matchup design swapped agent positions at game 25 of each 50-game set to control for first-move advantage — a standard technique in game AI evaluation that prevents position bias from masking true performance differences.<br><br>Three agents were tested: <strong>RandomAgent</strong> (uniform action sampling, baseline), <strong>HeuristicAgent</strong> (play low non-trump when leading; use minimum winning card on contested tricks), and <strong>AoCAgent</strong> (sample 15 opponent hands from unknown cards → depth-4 alpha-beta minimax on each → pick the action with highest average score). Performance was reported with 95% Wilson confidence intervals, average score margin, and standard deviation across all 50 games per matchup.</div>
+      </div>
+      <div class="pb-col">
+        <div class="pb-label">Results & Analysis</div>
+        <div class="pb-text">The AoC agent achieved a <strong>92% win rate against Random</strong> (CI [80.7%, 97.3%], avg margin +31.2 points, σ=19.4). The fully-above-50% CI confirms this isn't luck — the agent genuinely outperforms unstructured play. The low standard deviation indicates stable performance across different card distributions.<br><br>Against the Heuristic, the win rate was <strong>58%</strong> (CI [44.4%, 70.6%], avg +7.4 pts, σ=24.1). The CI touches 50%, reflecting the honest limits of a 50-game sample — and that the heuristic is a real opponent. AoC's edge appears mainly in mid-game positions where rigid rules fail: it samples possible opponent hands and identifies plays that the heuristic's fixed logic would miss. Performance stabilized at 10–15 sampled determinizations, a practical balance between decision quality and runtime for a 40-card game.</div>
+      </div>
+    </div>
+    <div class="proj-reflection">
+      <span class="refl-label">Takeaway</span>
+      <span class="refl-text">Building an agent that plays a real card game under genuine hidden information was the hardest and most satisfying project of the semester. The 58% win rate against the heuristic — not a blowout, but consistently above chance — showed the agent was doing real strategic reasoning, not just outperforming a weak baseline.</span>
+    </div>
+  </div>
 
   </div><!-- end projects -->
 </div>
@@ -604,58 +598,32 @@
   <div class="sec-head">
     <div class="sec-kicker">Technical Skills</div>
     <h2 class="sec-title">What I Can <em>Do</em></h2>
-    <p class="sec-sub">Competencies built through the projects above, with an honest self-assessment of where I stand.</p>
+    <p class="sec-sub">Competencies built hands-on through the projects above.</p>
   </div>
   <div class="skills-grid reveal">
-    <div class="skill-card">
-      <div class="sk-name">Search Algorithm Design</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="88%"></div></div>
-      <div class="sk-note">Built A*, UCS, and Greedy on a visibility graph from scratch. Understand heuristic admissibility empirically.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Experimental Methodology</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="90%"></div></div>
-      <div class="sk-note">Designed protocols for PA2–PA5: fixed seeds, controlled trials, confidence intervals, median timing.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Python & NumPy</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="84%"></div></div>
-      <div class="sk-note">Vectorized operations, benchmarking harness, modular simulation architecture.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Local Search & Optimization</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="82%"></div></div>
-      <div class="sk-note">Implemented HC variants and SA; can explain algorithm-landscape fit from 400 experiments.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Game AI & Adversarial Search</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="80%"></div></div>
-      <div class="sk-note">AoC + alpha-beta minimax under partial observability. Rigorous statistical evaluation.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Agent Design (PEAS)</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="79%"></div></div>
-      <div class="sk-note">Reflex, random, and model-based agents compared across structured environments.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">CSP Modeling</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="75%"></div></div>
-      <div class="sk-note">Three representations analyzed; understands MRV/LCV, backtracking, SAT compatibility.</div>
-    </div>
-    <div class="skill-card">
-      <div class="sk-name">Technical Writing & Analysis</div>
-      <div class="sk-track"><div class="sk-fill" style="width:0" data-w="86%"></div></div>
-      <div class="sk-note">Wrote methodology and results for three assignments. Data-first approach to interpretation.</div>
-    </div>
+    <div class="skill-card"><div class="sk-name">Search Algorithm Design</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="88%"></div></div><div class="sk-note">Built A*, UCS, and Greedy on a visibility graph. Understand heuristic admissibility and node expansion tradeoffs from direct measurement.</div></div>
+    <div class="skill-card"><div class="sk-name">Experimental Methodology</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="90%"></div></div><div class="sk-note">Designed protocols for PA2–PA5: fixed seeds, controlled trials, confidence intervals, median timing. Methodology before measurement.</div></div>
+    <div class="skill-card"><div class="sk-name">Python & NumPy</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="84%"></div></div><div class="sk-note">Vectorized operations, benchmarking harnesses, modular simulation architecture, BLAS-level understanding.</div></div>
+    <div class="skill-card"><div class="sk-name">Local Search & Optimization</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="82%"></div></div><div class="sk-note">Implemented HC variants and SA across 400 experiments. Can explain algorithm–landscape fit empirically, not just theoretically.</div></div>
+    <div class="skill-card"><div class="sk-name">Game AI & Adversarial Search</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="80%"></div></div><div class="sk-note">AoC + alpha-beta minimax under partial observability. Statistically rigorous win-rate evaluation with CIs.</div></div>
+    <div class="skill-card"><div class="sk-name">Agent Design (PEAS)</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="79%"></div></div><div class="sk-note">Reflex, random, and model-based agents compared empirically. Understanding of when complexity helps vs. hurts.</div></div>
+
+    <div class="skill-card"><div class="sk-name">Technical Writing & Analysis</div><div class="sk-track"><div class="sk-fill" style="width:0" data-w="86%"></div></div><div class="sk-note">Wrote methodology and results for three assignments. Data-first interpretation — results lead, not the hypothesis.</div></div>
   </div>
 </div>
 </div>
 
 <div class="divider"></div>
 
+<div style="padding: 20px 64px; background: var(--bg); border-top: 1px solid var(--rule); text-align: center;">
+  <p style="font-family:'JetBrains Mono',monospace; font-size:0.62rem; color:var(--ink-3); letter-spacing:0.04em;">
+    AI tools were used for minor grammar and wording assistance in the written descriptions of this portfolio.
+  </p>
+</div>
+
 <footer>
   <div>
-    <div class="ft-name">Malik J. Páramo Ríos</div>
+    <div class="ft-name">Malik J. <em>Páramo Ríos</em></div>
     <div style="font-size:0.75rem;color:var(--ink-3);margin-top:4px;">B.S. Computer Engineering &nbsp;·&nbsp; UPR Mayagüez</div>
   </div>
   <div class="ft-info">
